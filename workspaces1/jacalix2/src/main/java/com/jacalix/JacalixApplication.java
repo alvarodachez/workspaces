@@ -1,4 +1,4 @@
-package jacalix.app;
+package jacalix;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +10,7 @@ import jacalix.model.entity.Subscription;
 import jacalix.model.entity.View;
 
 @SpringBootApplication(scanBasePackages = {"jacalix.restController","jacalix.restService"})
-@EntityScan(basePackageClasses ={Customer.class,Product.class,Subscription.class,View.class})
+@EntityScan(basePackages ={"jacalix.model.entity"})
 public class JacalixApplication {
 
 	public static void main(String[] args) {
