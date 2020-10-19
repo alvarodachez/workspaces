@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Customer implements Serializable{
@@ -19,7 +22,11 @@ public class Customer implements Serializable{
 	private String surname;
 	private String dni;
 	private int age;
+	@OneToOne   
+	@JoinColumn(name = "subscription_id")
 	private Subscription sub;
+	@OneToMany
+	@JoinColumn(name="view_id")
 	private List<View>views;
 	
 	public Customer () {

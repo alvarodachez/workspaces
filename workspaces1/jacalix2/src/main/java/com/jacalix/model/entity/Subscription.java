@@ -12,11 +12,11 @@ public class Subscription {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int id;
-	SubscriptionType rentType;
-	LocalDate startSuscription;
-	LocalDate endSuscription;
-	int price;
+	private int id;
+	private SubscriptionType rentType;
+	private LocalDate startSuscription;
+	private LocalDate endSuscription;
+	private int price;
 	
 	public Subscription() {
 		

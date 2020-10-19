@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Product {
@@ -14,6 +15,7 @@ public class Product {
 	private String description;
 	private SubscriptionType rent;
 	private Category cat;
+	
 	
 	
 	
@@ -68,6 +70,8 @@ public class Product {
 	public void setCat(Category cat) {
 		this.cat = cat;
 	}
+
+	
 	
 	
 	
