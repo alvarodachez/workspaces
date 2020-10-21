@@ -10,18 +10,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity 
-public class View implements Serializable{
+public class View{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int id;
-	@OneToOne   
-	@JoinColumn(name = "product_id")
+	@OneToOne(targetEntity = Product.class)
 	private Product productViewed;
 	private LocalDate startView;
 	private LocalDate endView;

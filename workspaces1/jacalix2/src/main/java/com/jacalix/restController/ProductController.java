@@ -31,7 +31,7 @@ public class ProductController {
 	
 	@PostMapping
 	public ResponseEntity<?> createProduct(@RequestBody Product p) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(cService.createProduct(p, products));
+		return ResponseEntity.status(HttpStatus.CREATED).body(cService.createProduct(p));
 
 	}
 	

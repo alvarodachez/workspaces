@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.ForeignKey;
+
 @Entity
-public class Customer implements Serializable{
+public class Customer{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,11 +25,9 @@ public class Customer implements Serializable{
 	private String surname;
 	private String dni;
 	private int age;
-	@OneToOne   
-	@JoinColumn(name = "subscription_id")
+	@OneToOne(targetEntity = Subscription.class)
 	private Subscription sub;
-	@OneToMany
-	@JoinColumn(name="view_id")
+	@OneToMany(targetEntity = View.class)
 	private List<View>views;
 	
 	public Customer () {
