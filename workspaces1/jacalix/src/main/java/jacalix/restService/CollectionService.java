@@ -67,6 +67,18 @@ public class CollectionService {
 		return products;
 	}
 	
+	public Product getProduct(int id, List<Product> products) {
+		Product aux = new Product();
+		
+		for(Product p : products) {
+			if(p.getId() == id) {
+				aux = p;
+			}
+		}
+		
+		return aux;
+	}
+	
 	public Product updateProduct(Product p, List<Product>products) {
 		products.stream().filter(c -> c.getId() == p.getId()).forEach((p2)->{
 			if(p.getName()!=null) {

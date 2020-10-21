@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jacalix.model.entity.Category;
@@ -41,6 +42,14 @@ public class ProductController {
 	public ResponseEntity<?> getProducts() {
 		if(products!=null && !products.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.OK).body(cService.getProducts(this.products));
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found");
+		}
+	}
+	@GetMapping(path = "/")
+	public ResponseEntity<?> getProduct(@RequestParam int id){
+		if(products!=null && !products.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.OK).body(cService.getProduct(id,this.products));
 		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found");
 		}
