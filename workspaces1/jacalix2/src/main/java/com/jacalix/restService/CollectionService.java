@@ -18,7 +18,7 @@ public class CollectionService {
 	//@Autowired
 	//private CrudRepository<Customer, Integer> customerRepository;
 	
-	@Autowired(required = false)
+	@Autowired
 	private CrudRepository<Product, Integer> productRepository;
 
 	public Customer createCustomer(Customer c, List<Customer> customers){
@@ -67,7 +67,8 @@ public class CollectionService {
 	public Product createProduct(Product p){
 		//products.add(p);
 		
-		Product p1 = productRepository.save(p);
+		Product p1 = p; 
+		productRepository.save(p1);
 		
 		return p;
 	}

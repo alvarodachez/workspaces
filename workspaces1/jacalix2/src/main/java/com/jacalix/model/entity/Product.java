@@ -23,7 +23,7 @@ public class Product {
 		
 	}
 	
-	public Product (int id,String name,String description,SubscriptionType rent,Category cat) {
+	public Product (Integer id,String name,String description,SubscriptionType rent,Category cat) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -31,11 +31,11 @@ public class Product {
 		this.cat = cat;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
