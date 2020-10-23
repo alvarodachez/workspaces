@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-
 import jacalix.model.entity.Customer;
 import jacalix.model.entity.Product;
 import jacalix.model.entity.Subscription;

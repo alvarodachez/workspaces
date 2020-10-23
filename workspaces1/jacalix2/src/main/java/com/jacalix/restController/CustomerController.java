@@ -1,6 +1,5 @@
 package jacalix.restController;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jacalix.model.entity.Customer;
 import jacalix.model.entity.Subscription;
-import jacalix.model.entity.SubscriptionType;
 import jacalix.model.entity.View;
 import jacalix.restService.CollectionService;
 import jacalix.restService.CustomerService;

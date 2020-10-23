@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jacalix.model.entity.Category;
 import jacalix.model.entity.Product;
-import jacalix.model.entity.SubscriptionType;
+import jacalix.repo.ProductRepository;
 import jacalix.restService.CollectionService;
 
 @RestController
@@ -27,24 +26,23 @@ public class ProductController {
 	@Autowired
 	private CollectionService cService;
 	@Autowired
-	private CrudRepository<Product, Integer> productRepository;
-	
+	private ProductRepository pr;
 	private static List<Product> products= new ArrayList<>();
 	
 	
 	@PostMapping
 	public ResponseEntity<?> createProduct(@RequestBody Product p) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(cService.createProduct(p));
+		return ResponseEntity.status(HttpStatus.CREATED).body(pr.save(p));
 
 	}
 	
 	@GetMapping
 	public ResponseEntity<?> getProducts() {
-		if(products!=null && !products.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.OK).body(cService.getProducts(this.products));
-		}else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found");
-		}
+		
+			return ResponseEntity.status(HttpStatus.OK).body(pr.findAll());
+		
+			
+		
 	}
 	
 	@PutMapping

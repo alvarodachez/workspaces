@@ -3,8 +3,6 @@ package jacalix.restService;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +16,8 @@ public class CollectionService {
 	//@Autowired
 	//private CrudRepository<Customer, Integer> customerRepository;
 	
-	@Autowired
-	private CrudRepository<Product, Integer> productRepository;
+//	@Autowired
+//	private CrudRepository<Product, Integer> productRepository;
 
 	public Customer createCustomer(Customer c, List<Customer> customers){
 		if(c.getSub() == null) {
@@ -64,14 +62,14 @@ public class CollectionService {
 		return customers;
 	}
 	
-	public Product createProduct(Product p){
-		//products.add(p);
-		
-		Product p1 = p; 
-		productRepository.save(p1);
-		
-		return p;
-	}
+//	public Product createProduct(Product p){
+//		//products.add(p);
+//		
+//		Product p1 = p; 
+//		productRepository.save(p1);
+//		
+//		return p;
+//	}
 	
 	public List<Product> getProducts(List<Product> products){
 		return products;
