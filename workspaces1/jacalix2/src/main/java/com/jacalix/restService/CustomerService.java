@@ -1,15 +1,15 @@
-package jacalix.restService;
+package com.jacalix.restService;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import jacalix.model.entity.Customer;
-import jacalix.model.entity.Product;
-import jacalix.model.entity.Subscription;
-import jacalix.model.entity.SubscriptionType;
-import jacalix.model.entity.View;
-import jacalix.restController.ProductController;
+import com.jacalix.model.entity.Customer;
+import com.jacalix.model.entity.Product;
+import com.jacalix.model.entity.Subscription;
+import com.jacalix.model.entity.SubscriptionType;
+import com.jacalix.model.entity.View;
+import com.jacalix.restController.ProductController;
 
 @Service
 public class CustomerService {

@@ -1,4 +1,4 @@
-package jacalix.restController;
+package com.jacalix.restController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jacalix.model.entity.Customer;
-import jacalix.model.entity.Subscription;
-import jacalix.model.entity.View;
-import jacalix.restService.CollectionService;
-import jacalix.restService.CustomerService;
+import com.jacalix.model.entity.Customer;
+import com.jacalix.model.entity.Subscription;
+import com.jacalix.model.entity.View;
+import com.jacalix.restService.CollectionService;
+import com.jacalix.restService.CustomerService;
 
 @RestController
 @RequestMapping(path="/jacalix/customers")

@@ -1,4 +1,4 @@
-package jacalix.model.entity;
+package com.jacalix.model.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

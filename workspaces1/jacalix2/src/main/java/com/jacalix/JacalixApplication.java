@@ -1,12 +1,12 @@
-package jacalix;
+package com.jacalix;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(scanBasePackages = {"jacalix.restController","jacalix.restService"})
-@EntityScan(basePackages ={"jacalix.model.entity"})
+@SpringBootApplication(scanBasePackages = {"com.jacalix.restController","com.jacalix.restService"})
+@EntityScan(basePackages ={"com.jacalix.model.entity"})
 @EnableJpaRepositories(basePackages = {"*"})
 public class JacalixApplication {
 

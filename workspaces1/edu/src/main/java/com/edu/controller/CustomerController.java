@@ -20,7 +20,7 @@ public class CustomerController {
 	@Autowired
 	private CrudRepository<Customer, Long> customerRepository;
 	
-	@Autowired
+	@Autowired(required=false)
 	private CrudRepository<Address, Long> addressRepository;
 	
 	
@@ -31,7 +31,6 @@ public class CustomerController {
 	
 	@GetMapping("/customer/{id}")
 	public ResponseEntity<?> getCustomers(@PathVariable(required = false) String id){
-		
 		return ResponseEntity.ok(customerRepository.findById(Long.valueOf(id)));
 	}
 	

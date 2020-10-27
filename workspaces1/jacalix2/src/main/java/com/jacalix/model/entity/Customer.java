@@ -1,4 +1,4 @@
-package jacalix.model.entity;
+package com.jacalix.model.entity;
 
 import java.util.ArrayList;
 import java.util.List;
