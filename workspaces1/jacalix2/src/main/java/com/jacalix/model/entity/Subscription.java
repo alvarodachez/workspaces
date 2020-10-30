@@ -11,7 +11,7 @@ public class Subscription {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	private SubscriptionType rentType;
 	private LocalDate startSuscription;
 	private LocalDate endSuscription;
@@ -21,7 +21,7 @@ public class Subscription {
 		
 	}
 	
-	public Subscription(int id,SubscriptionType rentType, LocalDate startSuscription,LocalDate endSuscription,int price) {
+	public Subscription(Integer id,SubscriptionType rentType, LocalDate startSuscription,LocalDate endSuscription,int price) {
 		this.id = id;
 		this.rentType = rentType;
 		this.startSuscription = startSuscription;
@@ -61,11 +61,11 @@ public class Subscription {
 		this.price = price;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	

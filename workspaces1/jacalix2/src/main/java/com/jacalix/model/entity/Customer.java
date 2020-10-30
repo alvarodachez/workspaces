@@ -15,7 +15,7 @@ public class Customer{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	private String name;
 	private String surname;
 	private String dni;
@@ -29,7 +29,7 @@ public class Customer{
 		
 	}
 	
-	public Customer (int id, String name, String surname, String dni, int age,Subscription sub) {
+	public Customer (Integer id, String name, String surname, String dni, int age,Subscription sub) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
@@ -39,11 +39,11 @@ public class Customer{
 		this.views = new ArrayList<>();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

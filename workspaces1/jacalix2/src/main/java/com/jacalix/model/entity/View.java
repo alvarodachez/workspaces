@@ -13,7 +13,7 @@ public class View{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int id;
+	Integer id;
 	@OneToOne(targetEntity = Product.class)
 	private Product productViewed;
 	private LocalDate startView;
@@ -23,7 +23,7 @@ public class View{
 		super();
 	}
 
-	public View(int id,Product productViewed, LocalDate startView, LocalDate endView) {
+	public View(Integer id,Product productViewed, LocalDate startView, LocalDate endView) {
 		super();
 		this.id = id;
 		this.productViewed = productViewed;
@@ -55,11 +55,11 @@ public class View{
 		this.endView = endView;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	

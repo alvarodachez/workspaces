@@ -3,10 +3,8 @@ package com.jacalix.restService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,6 +13,7 @@ import com.jacalix.model.entity.Customer;
 import com.jacalix.model.entity.Product;
 import com.jacalix.model.entity.Subscription;
 import com.jacalix.model.entity.View;
+import com.jacalix.repo.CustomerRepository;
 import com.jacalix.repo.ProductRepository;
 
 @Service
@@ -26,21 +25,25 @@ public class CollectionService {
 //	private CrudRepository<Product, Integer> productRepository;
 	@Autowired
 	private ProductRepository pr;
+	@Autowired
+	private CustomerRepository cr;
 
-	public Customer createCustomer(Customer c, List<Customer> customers){
-		if(c.getSub() == null) {
-			c.setSub(new Subscription());
-		}
-		if(c.getViews()== null) {
-			c.setViews(new ArrayList<View>());
-		}
-		customers.add(c);
+	public Customer createCustomer(Customer c){
+//		if(c.getSub() == null) {
+//			c.setSub(new Subscription());
+//		}
+//		if(c.getViews()== null) {
+//			c.setViews(new ArrayList<View>());
+//		}
+		Customer c1 = c;
+		
+		cr.save(c1);
 		
 		return c;
 	}
 	
-	public List<Customer> getCustomers(List<Customer> customers){
-		return customers;
+	public ResponseEntity<?> getCustomers(){
+		return ResponseEntity.status(HttpStatus.OK).body(cr.findAll());
 	}
 	
 	public Customer updateCustomer(Customer c1, List<Customer> customers) {
@@ -62,12 +65,9 @@ public class CollectionService {
 		return c1;
 	}
 	
-	public List<Customer> deleteCustomer(Customer c2,List<Customer> customers) {
-		customers.stream().filter(c -> c.getId() == c2.getId()).forEach((c1)->{
-			customers.remove(customers.indexOf(c1));
-		});
-		
-		return customers;
+	public ResponseEntity<?> deleteCustomer(Customer c,Integer id) {
+		cr.deleteById(id);
+		return ResponseEntity.status(HttpStatus.OK).body(cr.findAll());
 	}
 	
 	public Product createProduct(Product p){

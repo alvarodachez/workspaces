@@ -1,54 +1,49 @@
 package com.jacalix.restService;
 
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jacalix.model.entity.Customer;
 import com.jacalix.model.entity.Product;
 import com.jacalix.model.entity.Subscription;
-import com.jacalix.model.entity.SubscriptionType;
 import com.jacalix.model.entity.View;
-import com.jacalix.restController.ProductController;
+import com.jacalix.repo.CustomerRepository;
+import com.jacalix.repo.ProductRepository;
+import com.jacalix.repo.SubscriptionRepository;
+import com.jacalix.repo.ViewRepository;
 
 @Service
 public class CustomerService {
+	@Autowired
+	private CustomerRepository cr;
+	@Autowired
+	private SubscriptionRepository sr;
+	@Autowired
+	private ProductRepository pr;
+	@Autowired
+	private ViewRepository vr;
 
-	public Subscription addSubscription(Subscription s, int id, List<Customer>customers) {
+	public Customer addSubscription(Subscription s, Integer id) {
 		
 		
-		customers.stream().filter(c -> c.getId() == id).forEach((c1)->{
-			c1.setSub(s);
-		});
+		Customer c = cr.findById(id).get();
+		sr.save(s);
+		c.setSub(s);
+		cr.save(c);
 		
-		return s;
+		
+		return c;
 	}
 	
-	public View addView(View v, int id, List<Customer> customers,int idP) {
+	public Customer addView(View v, int idc,int idp) {
 		
-		Product aux = new Product();
+		Customer c = cr.findById(idc).get();
+		Product p = pr.findById(idp).get();
+		v.setProductViewed(p);
+		vr.save(v);
+		c.getViews().add(v);
+		cr.save(c);
 		
-		for(Product p : ProductController.getProduct()) {
-			if(p.getId() == idP) {
-				aux = p;
-			}
-		}
-		
-		v.setProductViewed(aux);
-		
-		customers.stream().filter(c -> c.getId() == id).forEach((c1)->{
-			if(c1.getSub().getRentType() == SubscriptionType.GOLD) {
-				c1.getViews().add(v);
-			}else if(c1.getSub().getRentType() ==SubscriptionType.ADVANCED &&(v.getProductViewed().getRent()==SubscriptionType.ADVANCED || v.getProductViewed().getRent()==SubscriptionType.BASIC)) {
-				c1.getViews().add(v);
-			}else if(v.getProductViewed().getRent() == SubscriptionType.BASIC) {
-				c1.getViews().add(v);
-			}
-			
-			
-		});
-		
-		
-		return v;
+		return c;
 	}
 }
