@@ -1,8 +1,5 @@
 package com.jacalix.restController;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,49 +16,36 @@ import com.jacalix.model.entity.Product;
 import com.jacalix.restService.CollectionService;
 
 @RestController
-@RequestMapping(path="/jacalix/products")
+@RequestMapping(path = "/jacalix/products")
 public class ProductController {
 
 	@Autowired
 	private CollectionService cService;
-//	@Autowired
-//	private ProductRepository pr;
-	private static List<Product> products= new ArrayList<>();
-	
-	
+
 	@PostMapping
 	public ResponseEntity<?> createProduct(@RequestBody Product p) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(cService.createProduct(p));
 
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<?> getProducts() {
-		
-			return cService.getProducts();
-		
-			
-		
+
+		return cService.getProducts();
+
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateProduct(@RequestBody Product p,@PathVariable ("id") Integer id){
-		
-			return ResponseEntity.status(HttpStatus.OK).body(cService.updateProduct(p,id));
+	public ResponseEntity<?> updateProduct(@RequestBody Product p, @PathVariable("id") Integer id) {
 
-		
+		return ResponseEntity.status(HttpStatus.OK).body(cService.updateProduct(p, id));
+
 	}
-	
+
 	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<?> deleteProduct(@PathVariable ("id") Integer id){
+	public ResponseEntity<?> deleteProduct(@PathVariable("id") Integer id) {
 		return cService.deleteProduct(id);
-		
+
 	}
 
-	
-	//METODO PROVISIONAL HASTA QUE HAYA BBDD
-	public static List<Product>getProduct() {
-		return products;
-	}
-	
 }

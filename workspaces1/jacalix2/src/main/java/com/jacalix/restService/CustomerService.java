@@ -24,26 +24,24 @@ public class CustomerService {
 	private ViewRepository vr;
 
 	public Customer addSubscription(Subscription s, Integer id) {
-		
-		
+
 		Customer c = cr.findById(id).get();
 		sr.save(s);
 		c.setSub(s);
 		cr.save(c);
-		
-		
+
 		return c;
 	}
-	
-	public Customer addView(View v, int idc,int idp) {
-		
+
+	public Customer addView(View v, int idc, int idp) {
+
 		Customer c = cr.findById(idc).get();
 		Product p = pr.findById(idp).get();
 		v.setProductViewed(p);
 		vr.save(v);
 		c.getViews().add(v);
 		cr.save(c);
-		
+
 		return c;
 	}
 }
