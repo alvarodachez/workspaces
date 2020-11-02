@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = {"com.jacalix.restController","com.jacalix.restService"})
 @EntityScan(basePackages ={"com.jacalix.model.entity"})
-@EnableJpaRepositories(basePackages = {"*"})
+@EnableJpaRepositories(basePackages = {"com.jacalix.repo"})
 public class JacalixApplication {
 
 	public static void main(String[] args) {

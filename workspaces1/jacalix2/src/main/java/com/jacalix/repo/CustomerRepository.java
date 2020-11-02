@@ -8,4 +8,6 @@ import com.jacalix.model.entity.Customer;
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer,Integer>{
 
+	public Customer findByName(String name);
+	
 }

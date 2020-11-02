@@ -3,6 +3,7 @@ package com.jacalix.restController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.jacalix.restService.CustomerService;
 
 @RestController
 @RequestMapping(path = "/jacalix/customers")
+@CrossOrigin(origins = "*")
 public class CustomerController {
 
 	@Autowired
@@ -40,6 +42,15 @@ public class CustomerController {
 
 		return cService.getCustomers();
 
+	}
+
+	@GetMapping("/{name}")
+	public ResponseEntity<?> getCustomerByName(@PathVariable("name") String name) {
+		return cusService.getCustomerByName(name);
+	}
+	@GetMapping("/products/{id}")
+	public ResponseEntity<?>getProductsByRent(@PathVariable("id") Integer id){
+		return cusService.getProductsByRent(id);
 	}
 
 	@PutMapping("/{id}")
@@ -64,6 +75,10 @@ public class CustomerController {
 
 		return ResponseEntity.status(HttpStatus.OK).body(cusService.addView(v, idc, idp));
 
+	}
+	@PutMapping(path="/viewName/{id}&&{productName}")
+	public ResponseEntity<?>addViewByProductName(@PathVariable("id") Integer id, @PathVariable("productName")String name){
+		return ResponseEntity.status(HttpStatus.OK).body(cusService.addViewByProductName(id, name));
 	}
 
 }
