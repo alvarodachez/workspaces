@@ -28,22 +28,23 @@ public class CollectionService {
 	}
 
 	public ResponseEntity<?> getCustomers() {
+
 		return ResponseEntity.status(HttpStatus.OK).body(cr.findAll());
 	}
 
 	public Customer updateCustomer(Customer c, Integer id) {
 		Customer c1 = cr.findById(id).get();
 
-		if (c.getName() != null && c.getName().compareTo("")!=0) {
+		if (c.getName() != null && c.getName().compareTo("") != 0) {
 			c1.setName(c.getName());
 		}
-		if (c.getSurname() != null && c.getSurname().compareTo("")!=0) {
+		if (c.getSurname() != null && c.getSurname().compareTo("") != 0) {
 			c1.setSurname(c.getSurname());
 		}
-		if ((Integer) c.getAge() != null && (Integer)c.getAge()!=0) {
+		if ((Integer) c.getAge() != null && (Integer) c.getAge() != 0) {
 			c1.setAge(c.getAge());
 		}
-		if (c.getDni() != null && c.getDni().compareTo("")!=0) {
+		if (c.getDni() != null && c.getDni().compareTo("") != 0) {
 			c1.setDni(c.getDni());
 		}
 
@@ -66,7 +67,7 @@ public class CollectionService {
 	}
 
 	public ResponseEntity<?> getProducts() {
-		
+
 		return ResponseEntity.status(HttpStatus.OK).body(pr.findAll());
 	}
 

@@ -32,7 +32,7 @@ public class CustomerController {
 
 	@PostMapping
 	public ResponseEntity<?> createCustomer(@RequestBody Customer c) {
-//		customers.add(c);
+
 		return ResponseEntity.status(HttpStatus.CREATED).body(cService.createCustomer(c));
 
 	}
@@ -48,8 +48,9 @@ public class CustomerController {
 	public ResponseEntity<?> getCustomerByName(@PathVariable("name") String name) {
 		return cusService.getCustomerByName(name);
 	}
+
 	@GetMapping("/products/{id}")
-	public ResponseEntity<?>getProductsByRent(@PathVariable("id") Integer id){
+	public ResponseEntity<?> getProductsByRent(@PathVariable("id") Integer id) {
 		return cusService.getProductsByRent(id);
 	}
 
@@ -76,8 +77,10 @@ public class CustomerController {
 		return ResponseEntity.status(HttpStatus.OK).body(cusService.addView(v, idc, idp));
 
 	}
-	@PutMapping(path="/viewName/{id}&&{productName}")
-	public ResponseEntity<?>addViewByProductName(@PathVariable("id") Integer id, @PathVariable("productName")String name){
+
+	@PutMapping(path = "/viewName/{id}&&{productName}")
+	public ResponseEntity<?> addViewByProductName(@PathVariable("id") Integer id,
+			@PathVariable("productName") String name) {
 		return ResponseEntity.status(HttpStatus.OK).body(cusService.addViewByProductName(id, name));
 	}
 
