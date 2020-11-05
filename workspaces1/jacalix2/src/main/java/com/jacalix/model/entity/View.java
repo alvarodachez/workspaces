@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 public class View{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	@OneToOne(targetEntity = Product.class)
 	private Product productViewed;
