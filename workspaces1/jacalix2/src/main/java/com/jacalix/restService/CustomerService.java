@@ -21,6 +21,7 @@ import com.jacalix.repo.ViewRepository;
 
 @Service
 public class CustomerService {
+
 	@Autowired
 	private CustomerRepository cr;
 	@Autowired
@@ -30,9 +31,26 @@ public class CustomerService {
 	@Autowired
 	private ViewRepository vr;
 
+	/** Constante de precio subscripcion gold */
+	private static final int GOLD_SUBSCRIPTION_PRICE = 20;
+
+	/** Constante de precio subscripcion avanzada */
+	private static final int ADVANCED_SUBSCRIPTION_PRICE = 15;
+
+	/** Constante de precio subscripcion basica */
+	private static final int BASIC_SUBSCRIPTION_PRICE = 10;
+
 	public Customer addSubscription(Subscription s, Integer id) {
 
 		Customer c = cr.findById(id).get();
+
+		if (s.getRentType() == SubscriptionType.GOLD) {
+			s.setPrice(GOLD_SUBSCRIPTION_PRICE);
+		} else if (s.getRentType() == SubscriptionType.ADVANCED) {
+			s.setPrice(ADVANCED_SUBSCRIPTION_PRICE);
+		} else {
+			s.setPrice(BASIC_SUBSCRIPTION_PRICE);
+		}
 		sr.save(s);
 		c.setSub(s);
 		cr.save(c);
@@ -51,18 +69,18 @@ public class CustomerService {
 
 		return c;
 	}
-	
-	public Customer addViewByProductName(Integer id,String productName) {
+
+	public Customer addViewByProductName(Integer id, String productName) {
 		Customer c = cr.findById(id).get();
 		Product p = pr.findByName(productName);
-		
+
 		View v = new View();
 		v.setProductViewed(p);
 		v.setStartView(LocalDate.now());
 		vr.save(v);
 		c.getViews().add(v);
 		cr.save(c);
-		
+
 		return c;
 
 	}
@@ -70,6 +88,10 @@ public class CustomerService {
 	public ResponseEntity<?> getCustomerByName(String name) {
 
 		return ResponseEntity.status(HttpStatus.OK).body(cr.findByName(name));
+	}
+
+	public ResponseEntity<?> getCustomerByInitials(String initials) {
+		return ResponseEntity.status(HttpStatus.OK).body(cr.findByInitials(initials));
 	}
 
 	public ResponseEntity<?> getProductsByRent(Integer id) {

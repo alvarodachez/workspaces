@@ -53,6 +53,10 @@ public class CustomerController {
 	public ResponseEntity<?> getProductsByRent(@PathVariable("id") Integer id) {
 		return cusService.getProductsByRent(id);
 	}
+	@GetMapping("/initial/{initials}")
+	public ResponseEntity<?> getCustomerByInitials(@PathVariable("initials") String initials){
+		return cusService.getCustomerByInitials(initials);
+	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateCustomer(@RequestBody Customer c1, @PathVariable("id") Integer id) {
