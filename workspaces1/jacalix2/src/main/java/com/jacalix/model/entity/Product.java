@@ -1,12 +1,20 @@
 package com.jacalix.model.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Product {
+	/**
+	 * 
+	 */
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -14,12 +22,14 @@ public class Product {
 	private String description;
 	private SubscriptionType rent;
 	private Category cat;
+	@OneToMany(targetEntity = Document.class)
+	private List<Document>docs;
 	
 	
 	
 	
 	public Product () {
-		
+		this.docs = new ArrayList<>();
 	}
 	
 	public Product (Integer id,String name,String description,SubscriptionType rent,Category cat) {
@@ -68,6 +78,14 @@ public class Product {
 
 	public void setCat(Category cat) {
 		this.cat = cat;
+	}
+
+	public List<Document> getDoc() {
+		return this.docs;
+	}
+
+	public void setDoc(List<Document> docs) {
+		this.docs = docs;
 	}
 
 	
