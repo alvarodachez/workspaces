@@ -13,28 +13,29 @@ public class Document {
 	/**
 	 * 
 	 */
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	private Blob picture;
-	
+
 	private String fileName;
 	
+	private String fileType;
+
 	private Integer fileSize;
-	
+
 	public Document() {
 		super();
 	}
-	
-	public Document(Blob pic, String name, Integer size) {
+
+	public Document(Blob pic, String name, String fileType,Integer size) {
 		this.picture = pic;
 		this.fileName = name;
 		this.fileSize = size;
+		this.fileType = fileType;
 	}
-	
 
 	public Integer getId() {
 		return id;
@@ -67,5 +68,15 @@ public class Document {
 	public void setFileSize(Integer fileSize) {
 		this.fileSize = fileSize;
 	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
 	
+	
+
 }

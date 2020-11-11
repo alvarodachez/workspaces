@@ -1,11 +1,9 @@
 package com.jacalix.restController;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.sql.rowset.serial.SerialException;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,6 +45,18 @@ public class ProductController {
 		return cService.getProducts();
 
 	}
+	@GetMapping("/doc/{id}")
+	@ResponseBody
+	public ResponseEntity<byte[]>getDocument(@PathVariable("id") Integer id) throws SQLException{
+		
+		
+		return productService.getDocument(id);
+	}
+	
+	@GetMapping("/doc/download/{id}")
+	public ResponseEntity<Resource> downloadDocument(@PathVariable ("id") Integer id) throws SQLException{
+		return productService.downloadDocument(id);
+	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateProduct(@RequestBody Product p, @PathVariable("id") Integer id) {
@@ -61,8 +72,9 @@ public class ProductController {
 	}
 	@PutMapping("/doc/{id}")
 	public ResponseEntity<?> addDocument(@RequestParam(name = "pic", required = false) MultipartFile pic, 
-			@PathVariable(required = false) Integer id) throws SerialException, SQLException, IOException{
-		return ResponseEntity.status(HttpStatus.OK).body(productService.addDocument(pic,id));
+			@PathVariable(required = false) Integer id) {
+		productService.addDocument(pic, id);
+		return ResponseEntity.ok("File "+ pic.getOriginalFilename()+ "successfully uploaded");
 	}
 
 }

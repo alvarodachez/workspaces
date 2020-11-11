@@ -1,16 +1,17 @@
 package com.jacalix.model.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Product {
+public class Product implements Serializable{
 	/**
 	 * 
 	 */
@@ -22,14 +23,15 @@ public class Product {
 	private String description;
 	private SubscriptionType rent;
 	private Category cat;
-	@OneToMany(targetEntity = Document.class)
-	private List<Document>docs;
+	@OneToOne(targetEntity = Document.class)
+	@JsonIgnore
+	private Document doc;
 	
 	
 	
 	
 	public Product () {
-		this.docs = new ArrayList<>();
+		
 	}
 	
 	public Product (Integer id,String name,String description,SubscriptionType rent,Category cat) {
@@ -80,13 +82,15 @@ public class Product {
 		this.cat = cat;
 	}
 
-	public List<Document> getDoc() {
-		return this.docs;
+	public Document getDoc() {
+		return doc;
 	}
 
-	public void setDoc(List<Document> docs) {
-		this.docs = docs;
+	public void setDoc(Document doc) {
+		this.doc = doc;
 	}
+
+	
 
 	
 	
