@@ -2,6 +2,8 @@ package com.jacalix.restService;
 
 import java.sql.SQLException;
 
+import javax.print.attribute.standard.PDLOverrideSupported;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -27,13 +29,11 @@ public class ProductService extends AbstractServiceUtils {
 
 	public Product addDocument(MultipartFile mpf, Integer id) {
 		Product p = null;
+
 		try {
-			Document doc = documentRepository
-					.save(new Document(fhService.createBlob(mpf), 
-							mpf.getName(),mpf.getContentType(), 
-							Integer.valueOf((int) mpf.getSize())));
-			
-			
+			Document doc = documentRepository.save(new Document(fhService.createBlob(mpf), mpf.getName(),
+					mpf.getContentType(), Integer.valueOf((int) mpf.getSize())));
+
 			p = productRepository.findById(id).get();
 			p.setDoc(doc);
 			productRepository.save(p);
@@ -44,25 +44,22 @@ public class ProductService extends AbstractServiceUtils {
 		return p;
 
 	}
-	
+
 	public ResponseEntity<byte[]> getDocument(Integer id) throws SQLException {
 		Product p = productRepository.findById(id).get();
-		
+
 		Document file = documentRepository.findById(p.getDoc().getId()).get();
-		
-		return ResponseEntity.ok()
-		        .header("hola", "attachment; filename=\"" + file.getFileName() + "\"")
-		        .body(file.getPicture().getBytes(1L, (int)file.getPicture().length()));
+
+		return ResponseEntity.ok().header("hola", "attachment; filename=\"" + file.getFileName() + "\"")
+				.body(file.getPicture().getBytes(1L, (int) file.getPicture().length()));
 	}
-	
-	public ResponseEntity<Resource> downloadDocument(Integer id) throws SQLException{
+
+	public ResponseEntity<Resource> downloadDocument(Integer id) throws SQLException {
 		Product p = productRepository.findById(id).get();
-		
 		Document d = documentRepository.findById(p.getDoc().getId()).get();
-		
-		return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(d.getFileType()))
-                .header("hola", "attachment; filename=\"" + d.getFileName() + "\"")
-                .body(new ByteArrayResource(d.getPicture().getBytes(1L, (int)d.getPicture().length())));
+
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType(d.getFileType()))
+				.header("hola", "attachment; filename=\"" + d.getFileName() + "\"")
+				.body(new ByteArrayResource(d.getPicture().getBytes(1L, (int) d.getPicture().length())));
 	}
 }
