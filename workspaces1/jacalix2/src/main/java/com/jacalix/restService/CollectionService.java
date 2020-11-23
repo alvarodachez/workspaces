@@ -97,4 +97,14 @@ public class CollectionService {
 		return ResponseEntity.status(HttpStatus.OK).body(pr.findAll());
 	}
 
+	public void setPr(ProductRepository pr) {
+		this.pr = pr;
+	}
+
+	public void setCr(CustomerRepository cr) {
+		this.cr = cr;
+	}
+	
+	
+
 }
