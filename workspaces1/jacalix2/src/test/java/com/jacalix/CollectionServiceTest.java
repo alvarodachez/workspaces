@@ -71,7 +71,7 @@ public class CollectionServiceTest {
 		assertEquals(sut.updateCustomer(arg, 1).getSurname(), res.getSurname());
 		assertEquals(sut.updateCustomer(arg, 1).getAge(), res.getAge());
 		assertEquals(sut.updateCustomer(arg, 1).getDni(), res.getDni());
-
+		//Mockito.verify(mockedCustomer,Mockito.never()).setName(Mockito.anyString());
 	}
 
 	private static Stream<Arguments> updateCustomerDataProvider() {
@@ -80,6 +80,7 @@ public class CollectionServiceTest {
 		toUpdate.setSurname("");
 		toUpdate.setAge(1);
 		toUpdate.setDni("");
+
 		Customer correctUpdate = mock(Customer.class);
 		correctUpdate.setName("nombre");
 		correctUpdate.setSurname("apellidos");
@@ -91,10 +92,9 @@ public class CollectionServiceTest {
 		correctUpdate.setSurname(null);
 		correctUpdate.setAge(0);
 		correctUpdate.setDni(null);
-		return Stream.of(
-				Arguments.of(toUpdate, correctUpdate)
-				//Arguments.of(nullUpdate, correctUpdate)
-				);
+		return Stream.of(Arguments.of(toUpdate, correctUpdate)
+		// Arguments.of(nullUpdate, correctUpdate)
+		);
 	}
 
 }
