@@ -9,13 +9,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.jacalix.restService.CompressService;
 
-@SpringBootApplication(scanBasePackages = {"com.jacalix.restController","com.jacalix.restService"})
-@EntityScan(basePackages ={"com.jacalix.model.entity"})
-@EnableJpaRepositories(basePackages = {"com.jacalix.repo"})
-public class JacalixApplication implements CommandLineRunner{
+@SpringBootApplication(scanBasePackages = { "com.jacalix.restController", "com.jacalix.restService" })
+@EntityScan(basePackages = { "com.jacalix.model.entity" })
+@EnableJpaRepositories(basePackages = { "com.jacalix.repo" })
+public class JacalixApplication implements CommandLineRunner {
 
 	@Autowired
 	CompressService cs;
+
 	public static void main(String[] args) {
 		SpringApplication.run(JacalixApplication.class, args);
 	}
