@@ -44,6 +44,11 @@ public class CustomerController {
 
 	}
 
+	@GetMapping("/username")
+	public ResponseEntity<?> getCustomerByUsername(@PathVariable("username") String username) {
+		return ResponseEntity.status(HttpStatus.OK).body(cusService.getCustomerByUserName(username));
+	}
+
 	@GetMapping("/{name}")
 	public ResponseEntity<?> getCustomerByName(@PathVariable("name") String name) {
 		return cusService.getCustomerByName(name);
@@ -53,8 +58,9 @@ public class CustomerController {
 	public ResponseEntity<?> getProductsByRent(@PathVariable("id") Integer id) {
 		return cusService.getProductsByRent(id);
 	}
+
 	@GetMapping("/initial/{initials}")
-	public ResponseEntity<?> getCustomerByInitials(@PathVariable("initials") String initials){
+	public ResponseEntity<?> getCustomerByInitials(@PathVariable("initials") String initials) {
 		return cusService.getCustomerByInitials(initials);
 	}
 

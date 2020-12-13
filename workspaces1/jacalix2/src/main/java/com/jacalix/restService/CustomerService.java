@@ -84,6 +84,10 @@ public class CustomerService {
 		return c;
 
 	}
+	
+	public Customer getCustomerByUserName(String username) {
+		return cr.findByUserName(username);
+	}
 
 	public ResponseEntity<?> getCustomerByName(String name) {
 
@@ -92,6 +96,10 @@ public class CustomerService {
 
 	public ResponseEntity<?> getCustomerByInitials(String initials) {
 		return ResponseEntity.status(HttpStatus.OK).body(cr.findByInitials(initials));
+	}
+	
+	public void createUserAdmin(Customer c) {
+		cr.save(c);
 	}
 
 	public ResponseEntity<?> getProductsByRent(Integer id) {

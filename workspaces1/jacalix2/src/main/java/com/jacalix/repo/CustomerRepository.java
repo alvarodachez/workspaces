@@ -12,7 +12,9 @@ import com.jacalix.model.entity.Customer;
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 
-	public Customer findByName(String name);
+	public List<Customer>findByName(String name);
+	
+	public Customer findByUserName(String username); 
 
 	@Query(value = "SELECT * FROM customer WHERE name LIKE ?1%", nativeQuery = true)
 	public List<Customer> findByInitials(@Param("initials") String initials);
