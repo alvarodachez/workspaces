@@ -37,6 +37,8 @@ public class Match implements Serializable {
 	/** Codigo de entrada en partida **/
 	private String gameCode;
 
+	private String wordAnswer;
+
 	/**
 	 * @return the matchId
 	 */
@@ -126,6 +128,15 @@ public class Match implements Serializable {
 	 */
 	public void setGameCode(String gameCode) {
 		this.gameCode = gameCode;
+	}
+
+	@Column(name = "match_word_answer")
+	public String getWordAnswer() {
+		return wordAnswer;
+	}
+
+	public void setWordAnswer(String wordAnswer) {
+		this.wordAnswer = wordAnswer;
 	}
 
 	public void addPlayer(Player p) {
