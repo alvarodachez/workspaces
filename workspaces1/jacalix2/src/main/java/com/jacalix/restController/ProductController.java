@@ -70,7 +70,20 @@ public class ProductController {
 		return cService.deleteProduct(id);
 
 	}
-	@PutMapping("/doc/{id}")
+	
+	@GetMapping("/gold")
+	public ResponseEntity<?> getGoldProducts(){
+		return ResponseEntity.status(HttpStatus.OK).body(productService.getGoldProducts());
+	}
+	@GetMapping("/advanced")
+	public ResponseEntity<?> getAdvancedProducts(){
+		return ResponseEntity.status(HttpStatus.OK).body(productService.getAdvancedProducts());
+	}
+	@GetMapping("/basic")
+	public ResponseEntity<?> getBasicProducts(){
+		return ResponseEntity.status(HttpStatus.OK).body(productService.getBasicProducts());
+	}
+	@PostMapping("/doc/{id}")
 	public ResponseEntity<?> addDocument(@RequestParam(name = "pic", required = false) MultipartFile pic, 
 			@PathVariable(required = false) Integer id) {
 		productService.addDocument(pic, id);

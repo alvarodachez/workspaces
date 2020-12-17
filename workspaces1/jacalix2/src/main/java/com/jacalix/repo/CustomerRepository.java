@@ -14,7 +14,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 
 	public List<Customer>findByName(String name);
 	
-	public Customer findByUserName(String username); 
+	public Customer findByUsername(String username); 
 
 	@Query(value = "SELECT * FROM customer WHERE name LIKE ?1%", nativeQuery = true)
 	public List<Customer> findByInitials(@Param("initials") String initials);

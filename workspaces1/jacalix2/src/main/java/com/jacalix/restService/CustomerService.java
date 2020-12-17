@@ -57,6 +57,10 @@ public class CustomerService {
 
 		return c;
 	}
+	
+	public Customer getCustomerById(Integer id) {
+		return cr.findById(id).get();
+	}
 
 	public Customer addView(View v, int idc, int idp) {
 
@@ -86,7 +90,7 @@ public class CustomerService {
 	}
 	
 	public Customer getCustomerByUserName(String username) {
-		return cr.findByUserName(username);
+		return cr.findByUsername(username);
 	}
 
 	public ResponseEntity<?> getCustomerByName(String name) {

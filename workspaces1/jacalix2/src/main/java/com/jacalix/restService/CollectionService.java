@@ -7,8 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.jacalix.model.entity.Customer;
 import com.jacalix.model.entity.Product;
+import com.jacalix.model.entity.Subscription;
+import com.jacalix.model.entity.SubscriptionType;
+import com.jacalix.model.entity.UserType;
 import com.jacalix.repo.CustomerRepository;
 import com.jacalix.repo.ProductRepository;
+import com.jacalix.repo.SubscriptionRepository;
 
 @Service
 public class CollectionService {
@@ -17,10 +21,20 @@ public class CollectionService {
 	private ProductRepository pr;
 	@Autowired
 	private CustomerRepository cr;
+	@Autowired
+	private SubscriptionRepository sr;
 
 	public Customer createCustomer(Customer c) {
 
 		Customer c1 = c;
+		c1.setUserType(UserType.USER);
+		
+		Subscription s  = new Subscription();
+		s.setPrice(10);
+		s.setRentType(SubscriptionType.BASIC);
+		
+		sr.save(s);
+		c1.setSub(s);
 
 		cr.save(c1);
 

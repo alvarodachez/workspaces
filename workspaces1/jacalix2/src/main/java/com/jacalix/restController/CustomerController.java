@@ -44,11 +44,15 @@ public class CustomerController {
 
 	}
 
-	@GetMapping("/username")
+	@GetMapping("/username/{username}")
 	public ResponseEntity<?> getCustomerByUsername(@PathVariable("username") String username) {
 		return ResponseEntity.status(HttpStatus.OK).body(cusService.getCustomerByUserName(username));
 	}
 
+	@GetMapping("/id/{id}")
+	public ResponseEntity<?>getCustomerById(@PathVariable("id") Integer id){
+		return ResponseEntity.status(HttpStatus.OK).body(cusService.getCustomerById(id));
+	}
 	@GetMapping("/{name}")
 	public ResponseEntity<?> getCustomerByName(@PathVariable("name") String name) {
 		return cusService.getCustomerByName(name);

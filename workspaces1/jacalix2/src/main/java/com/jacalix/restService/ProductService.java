@@ -1,12 +1,12 @@
 package com.jacalix.restService;
 
 import java.sql.SQLException;
-
-import javax.print.attribute.standard.PDLOverrideSupported;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,6 +26,18 @@ public class ProductService extends AbstractServiceUtils {
 
 	@Autowired
 	private FileHandlerService fhService;
+	
+	public List<Product>getGoldProducts(){
+		return productRepository.getProductsByGoldRent();
+	}
+	
+	public List<Product>getAdvancedProducts(){
+		return productRepository.getProductsByAdvancedRent();
+	}
+	
+	public List<Product>getBasicProducts(){
+		return productRepository.getProductsByBasicRent();
+	}
 
 	public Product addDocument(MultipartFile mpf, Integer id) {
 		Product p = null;
@@ -57,6 +69,8 @@ public class ProductService extends AbstractServiceUtils {
 	public ResponseEntity<Resource> downloadDocument(Integer id) throws SQLException {
 		Product p = productRepository.findById(id).get();
 		Document d = documentRepository.findById(p.getDoc().getId()).get();
+		
+		
 
 		return ResponseEntity.ok().contentType(MediaType.parseMediaType(d.getFileType()))
 				.header("hola", "attachment; filename=\"" + d.getFileName() + "\"")
