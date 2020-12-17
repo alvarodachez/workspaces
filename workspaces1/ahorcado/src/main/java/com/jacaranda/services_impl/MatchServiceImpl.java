@@ -33,6 +33,7 @@ public class MatchServiceImpl implements MatchService {
 
 		m.setWord(getWordService.getRandomWord());
 		m.setGameCode(codeService.getRandomGameCode());
+		m.setWordAnswer(buildAnswer(m.getWord()));
 
 		matchRepo.save(m);
 
@@ -68,19 +69,71 @@ public class MatchServiceImpl implements MatchService {
 				m.setTries(m.getTries() + 1);
 				m.setFails(m.getFails() + 1);
 				p.setFails(p.getFails() + 1);
-				if (m.getFails() == 7) {
+				if (m.getFails() == MAX_FAILS) {
 					res = "DEFEAT";
 				} else {
-					res = "FAIL";
+					res = m.getWordAnswer()+" FAILS: "+m.getFails();
 				}
 			}
 
 		} else if (answer.length() == 1) {
-			//logica para un caracter ( paso a minuscular ir pintando guiones o caracteres (crear atributo en match) cuidar tildes
+			// logica para un caracter ( paso a minuscular ir pintando guiones o caracteres
+			// (crear atributo en match) cuidar tildes
 
+			checkAnswer(m.getMatchId(), p.getPlayerId(), answer);
+			if(m.getFails() == MAX_FAILS) {
+				res = "DEFEAT";
+			} else {
+				res = m.getWordAnswer() +" FAILS: "+m.getFails();
+			}
 		}
 
-		return null;
+		return res;
+	}
+
+	private void checkAnswer(Long matchId, Long playerId, String answer) {
+
+		Match m = matchRepo.findById(matchId).get();
+		Player p = playerRepo.findById(playerId).get();
+
+		StringBuilder aux = new StringBuilder("");
+		Boolean flag = false;
+
+		for (int i = 0; i < m.getWord().length(); i++) {
+			if (answer.compareTo(String.valueOf(m.getWord().charAt(i))) == 0) {
+
+				flag = true;
+				aux.append(answer);
+
+			} else {
+				aux.append("-");
+			}
+		}
+		if (flag == false) {
+
+			p.setFails(p.getFails() + 1);
+			m.setFails(m.getFails() + 1);
+			m.setTries(m.getTries() + 1);
+			m.setWordAnswer(aux.toString());
+			matchRepo.save(m);
+			playerRepo.save(p);
+		} else {
+			m.setTries(m.getTries() + 1);
+			m.setWordAnswer(aux.toString());
+			matchRepo.save(m);
+		}
+	}
+
+	private String buildAnswer(String word) {
+		StringBuilder aux = new StringBuilder("");
+
+		int length = word.length();
+
+		for (int i = 0; i < length; i++) {
+			aux.append("-");
+		}
+
+		return aux.toString();
 	}
 
 }
