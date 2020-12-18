@@ -33,9 +33,9 @@ public class MatchController {
 		return ResponseEntity.status(HttpStatus.OK).body(matchService.joinMatch(username, gameCode));
 	}
 
-	@PostMapping(path = "/{username}&&{gameCode}&&{answer}")
+	@PostMapping(path = "/answer/{username}&&{gameCode}&&{answer}")
 	public ResponseEntity<?> sendAnswer(@PathVariable("username") String username,
-			@PathVariable("gamecode") String gameCode, @PathVariable("answer") String answer) {
+			@PathVariable("gameCode") String gameCode, @PathVariable("answer") String answer) {
 		return ResponseEntity.status(HttpStatus.OK).body(matchService.sendAnswer(username, gameCode, answer));
 	}
 
