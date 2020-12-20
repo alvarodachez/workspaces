@@ -72,7 +72,7 @@ public class MatchServiceImpl implements MatchService {
 				if (m.getFails() == MAX_FAILS) {
 					res = "DEFEAT";
 				} else {
-					res = m.getWordAnswer()+" FAILS: "+m.getFails();
+					res = m.getWordAnswer() + " FAILS: " + m.getFails();
 				}
 			}
 
@@ -81,10 +81,10 @@ public class MatchServiceImpl implements MatchService {
 			// (crear atributo en match) cuidar tildes
 
 			checkAnswer(m.getMatchId(), p.getPlayerId(), answer);
-			if(m.getFails() == MAX_FAILS) {
+			if (m.getFails() == MAX_FAILS) {
 				res = "DEFEAT";
 			} else {
-				res = m.getWordAnswer() +" FAILS: "+m.getFails();
+				res = m.getWordAnswer() + " FAILS: " + m.getFails();
 			}
 		}
 
@@ -96,18 +96,22 @@ public class MatchServiceImpl implements MatchService {
 		Match m = matchRepo.findById(matchId).get();
 		Player p = playerRepo.findById(playerId).get();
 
-		StringBuilder aux = new StringBuilder("");
+		StringBuilder aux = new StringBuilder(m.getWordAnswer());
+		StringBuilder aux1 = new StringBuilder("");
+
 		Boolean flag = false;
 
 		for (int i = 0; i < m.getWord().length(); i++) {
 			if (answer.compareTo(String.valueOf(m.getWord().charAt(i))) == 0) {
 
 				flag = true;
-				aux.append(answer);
+				aux.replace(i, i+1, answer);
+				//aux1.append(answer);
 
-			} else {
-				aux.append("-");
-			}
+			} 
+//			else if("-".compareTo(String.valueOf(m.getWordAnswer().charAt(i))) != 0){
+//				aux1.append(m.getWord().charAt(i));
+//			}
 		}
 		if (flag == false) {
 
